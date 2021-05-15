@@ -4,16 +4,16 @@ const score = document.getElementById("score")
 let squares=[]
 let currentSnake=[2,1,0];
 let direction = 1;
-let width=10;
+const width=10;
 
 
 function createGrids(){
 
     //create 100 of these elements with for loop
-    for(let i=0;i<100;i++){
+    for(let i=0;i<width*width;i++){
     //create elements
     const square = document.createElement("div")
-    console.log(square);
+    // console.log(square);
     //add styling to these elements
     square.classList.add('square')
     // Put the elements in grid
@@ -28,6 +28,18 @@ createGrids();
 currentSnake.forEach(index=>squares[index].classList.add("snake"))
 
 function move(){
+    if(
+        (currentSnake[0]+width >=width*width && direction === width) ||//if snake has hit bottom
+        (currentSnake[0]+width ===width-1 && direction === 1) || //Snake has hit right wall
+        (currentSnake[0]+width ===0 && direction === -1) || //Snake has hit left wall
+        (currentSnake[0]-width < 0  && direction === -width) || //Snake has hit top wall
+        squares[currentSnake[0] + direction].classList.contains("snake")
+    )
+    
+    {
+        clearInterval(timerId);
+    } 
+    
     // remove the last element
     const tail = currentSnake.pop();
     // remove styling from the last element
@@ -61,5 +73,8 @@ function control(e){
         direction = +width;
     }
 }
+
+// keyup - event is fired when pressed key is release
+// keydown - event is fired when key is pressed
 
 document.addEventListener("keyup",control);
