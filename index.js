@@ -4,6 +4,7 @@ const score = document.getElementById("score")
 let squares=[]
 let currentSnake=[2,1,0];
 let direction = 1;
+let width=10;
 
 
 function createGrids(){
@@ -48,13 +49,17 @@ let timerId = setInterval(move,1000);
 function control(e){
     if(e.key == 'ArrowRight'){
         console.log("Move snake right")
+        direction = 1;
     }else if(e.key == 'ArrowUp'){
         console.log("Move snake up")
+        direction = -width;
     }else if(e.key == 'ArrowLeft'){
         console.log("Move snake left")
+        direction = -1;
     }else if(e.key === 'ArrowDown'){
         console.log("Move snake down")
+        direction = +width;
     }
 }
 
-// document.addEventListener("keyup",control);
+document.addEventListener("keyup",control);
