@@ -47,6 +47,20 @@ function move(){
     squares[tail].classList.remove("snake");
     // add square to the begining 
     currentSnake.unshift(currentSnake[0]+direction);
+
+    if(){
+        //snake head collides with apple, remove class of apple and add class of snake
+
+        // grow our snake by adding class of snake
+
+        //generate a new apple
+
+        //Add one to the score
+
+        // speed up our snake
+    }
+
+
      //add the styling
     squares[currentSnake[0]].classList.add("snake");
 }
