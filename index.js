@@ -48,9 +48,10 @@ function move(){
     // add square to the begining 
     currentSnake.unshift(currentSnake[0]+direction);
 
-    if(){
+    if(squares[currentSnake[0]].classList.contains("apple")){
         //snake head collides with apple, remove class of apple and add class of snake
-
+        squares[currentSnake[0]].classList.remove("apple")
+        console.log("removed")
         // grow our snake by adding class of snake
 
         //generate a new apple
