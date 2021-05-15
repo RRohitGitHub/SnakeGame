@@ -2,7 +2,7 @@ const grid = document.querySelector(".grid")
 const startButton = document.querySelector("#button")
 const score = document.getElementById("score")
 let squares=[]
-let currentSnake=[25,26,27];
+let currentSnake=[2,1,0];
 
 
 function createGrids(){
@@ -24,3 +24,15 @@ function createGrids(){
 createGrids();
 
 currentSnake.forEach(index=>squares[index].classList.add("snake"))
+
+function move(){
+    // remove the last element
+    const tail = currentSnake.pop();
+    console.log(tail);
+    console.log(currentSnake);
+    // remove styling from the last element
+    squares[tail].classList.remove("snake");
+    // add square to the begining and also add the styling
+}
+
+move()
