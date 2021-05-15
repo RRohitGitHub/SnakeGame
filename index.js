@@ -1,14 +1,15 @@
 const grid = document.querySelector(".grid")
-const startButton = document.querySelector("#button")
+const startButton = document.querySelector("#start")
 const scoreDisplay = document.getElementById("score")
 let squares=[]
-let currentSnake=[2,1,0];
+let currentSnake=[1,0];
 let direction = 1;
 const width=10;
 let appleIndex=0;
 let score = 0;
 let intervalTime = 1000;
 let speed = 0.9;
+let timerId=0;
 
 function createGrids(){
 
@@ -29,6 +30,25 @@ function createGrids(){
 createGrids();
 
 currentSnake.forEach(index=>squares[index].classList.add("snake"))
+
+
+function startGame(){
+    //Remove the snake
+    currentSnake.forEach(index=>squares[index].classList.remove("snake"));
+    // Remove the apple
+    squares[appleIndex].classList.remove("apple");
+    clearInterval(timerId);
+    currentSnake=[1,0];
+    direction = 1;
+    score = 0;
+    scoreDisplay.textContent=score;
+    intervalTime = 1000;
+    // Generate Apple
+    generateApple()
+    // Readd the class of snake for our new current Snake
+    currentSnake.forEach(index=>squares[index].classList.add("snake"))
+    timerId = setInterval(move,intervalTime);
+}
 
 function move(){
     if(
@@ -73,9 +93,6 @@ function move(){
      //add the styling
     squares[currentSnake[0]].classList.add("snake");
 }
-move()
-
-let timerId = setInterval(move,intervalTime);
 
 function generateApple(){
     do{
@@ -110,4 +127,5 @@ function control(e){
 // keyup - event is fired when pressed key is release
 // keydown - event is fired when key is pressed
 
+startButton.addEventListener("click",startGame);
 document.addEventListener("keyup",control);
