@@ -36,5 +36,25 @@ function move(){
      //add the styling
     squares[currentSnake[0]].classList.add("snake");
 }
-
 move()
+
+let timerId = setInterval(move,1000);
+
+//39 is right arrow
+//38 is up arrow
+//37 is left arrow
+//40 is down arrow
+
+function control(e){
+    if(e.key == 'ArrowRight'){
+        console.log("Move snake right")
+    }else if(e.key == 'ArrowUp'){
+        console.log("Move snake up")
+    }else if(e.key == 'ArrowLeft'){
+        console.log("Move snake left")
+    }else if(e.key === 'ArrowDown'){
+        console.log("Move snake down")
+    }
+}
+
+// document.addEventListener("keyup",control);
