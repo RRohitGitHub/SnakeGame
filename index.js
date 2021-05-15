@@ -1,12 +1,12 @@
 const grid = document.querySelector(".grid")
 const startButton = document.querySelector("#button")
-const score = document.getElementById("score")
+const scoreDisplay = document.getElementById("score")
 let squares=[]
 let currentSnake=[2,1,0];
 let direction = 1;
 const width=10;
 let appleIndex=0;
-
+let score = 0;
 
 function createGrids(){
 
@@ -52,15 +52,18 @@ function move(){
         //snake head collides with apple, remove class of apple and add class of snake
         squares[currentSnake[0]].classList.remove("apple")
         console.log("removed")
+        console.log(currentSnake)
         // grow our snake by adding class of snake
-
+        squares[tail].classList.add("snake");
+        currentSnake.push(tail)
         //generate a new apple
-
+        generateApple();
         //Add one to the score
-
+        score++;
+        scoreDisplay.textContent=score;
         // speed up our snake
     }
-
+    console.log(currentSnake)
 
      //add the styling
     squares[currentSnake[0]].classList.add("snake");
