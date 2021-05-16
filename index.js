@@ -2,7 +2,7 @@ const grid = document.querySelector(".grid")
 const startButton = document.querySelector("#start")
 const scoreDisplay = document.getElementById("score")
 let squares=[]
-let currentSnake=[1,0];
+let currentSnake=[2,1,0];
 let direction = 1;
 const width=10;
 let appleIndex=0;
@@ -10,6 +10,7 @@ let score = 0;
 let intervalTime = 1000;
 let speed = 0.9;
 let timerId=0;
+let flag = false;
 
 function createGrids(){
 
@@ -33,12 +34,15 @@ currentSnake.forEach(index=>squares[index].classList.add("snake"))
 
 
 function startGame(){
+    console.log("Current Snake while entering after alert");
+    console.log(currentSnake);
     //Remove the snake
     currentSnake.forEach(index=>squares[index].classList.remove("snake"));
+    
     // Remove the apple
     squares[appleIndex].classList.remove("apple");
     clearInterval(timerId);
-    currentSnake=[1,0];
+    currentSnake=[2,1,0];
     direction = 1;
     score = 0;
     scoreDisplay.textContent=score;
@@ -48,6 +52,7 @@ function startGame(){
     // Readd the class of snake for our new current Snake
     currentSnake.forEach(index=>squares[index].classList.add("snake"))
     timerId = setInterval(move,intervalTime);
+
 }
 
 function move(){
@@ -61,15 +66,18 @@ function move(){
     
     {
         clearInterval(timerId);
+        flag = confirm("Press OK to restart and cancel to close!")
+        startGame();
     } 
-    
+
+    if(!flag){
     // remove the last element
     const tail = currentSnake.pop();
     // remove styling from the last element
     squares[tail].classList.remove("snake");
     // add square to the begining 
     currentSnake.unshift(currentSnake[0]+direction);
-
+    }
     if(squares[currentSnake[0]].classList.contains("apple")){
         //snake head collides with apple, remove class of apple and add class of snake
         squares[currentSnake[0]].classList.remove("apple")
@@ -81,7 +89,7 @@ function move(){
         //generate a new apple
         generateApple();
         //Add one to the score
-        score++;
+        score+=5;
         scoreDisplay.textContent=score;
         // speed up our snake
         clearInterval(timerId)
