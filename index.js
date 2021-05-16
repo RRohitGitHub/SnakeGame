@@ -70,14 +70,13 @@ function move(){
         startGame();
     } 
 
-    if(!flag){
     // remove the last element
     const tail = currentSnake.pop();
     // remove styling from the last element
     squares[tail].classList.remove("snake");
     // add square to the begining 
     currentSnake.unshift(currentSnake[0]+direction);
-    }
+    
     if(squares[currentSnake[0]].classList.contains("apple")){
         //snake head collides with apple, remove class of apple and add class of snake
         squares[currentSnake[0]].classList.remove("apple")
